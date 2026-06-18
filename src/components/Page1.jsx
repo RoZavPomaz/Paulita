@@ -12,6 +12,7 @@ export const Page1 = () => {
             hace un año <br />
             llegaste aquí
           </h1>
+
           <p className="text-center text-white">
             Todo empezó <br />a cambiar
           </p>
