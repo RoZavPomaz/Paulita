@@ -1,20 +1,24 @@
 import { CiStar } from "react-icons/ci";
 import { FaRegHeart } from "react-icons/fa";
+import ScrollReveal from "./ScrollReveal";
 
 export const Page4 = () => {
   return (
     <div className="h-screen">
-      <div className="text-white text-center">
-        <p className="font-Chelsea">Lugares, risas</p>
-        <p className="font-Chelsea">y aventuras</p>
-        <div className="flex  gap-3 items-center justify-center mt-4 mb-6">
-          <hr className="w-10" />
-          <FaRegHeart />
-          <hr className="w-10" />
+      <ScrollReveal animation="fade-down">
+        <div className="text-white text-center">
+          <p className="font-Chelsea">Lugares, risas</p>
+          <p className="font-Chelsea">y aventuras</p>
+          <div className="flex  gap-3 items-center justify-center mt-4 mb-6">
+            <hr className="w-10" />
+            <FaRegHeart />
+            <hr className="w-10" />
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
+
       <section className="flex flex-col gap-6">
-        <div className="flex flex-col items-center">
+        <ScrollReveal animation="fade-up" delay={100} className="flex flex-col items-center">
           <div
             className="
       relative
@@ -42,8 +46,9 @@ export const Page4 = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col items-center">
+        </ScrollReveal>
+
+        <ScrollReveal animation="fade-up" delay={300} className="flex flex-col items-center">
           <div
             className="
       relative
@@ -71,8 +76,9 @@ export const Page4 = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col items-center">
+        </ScrollReveal>
+
+        <ScrollReveal animation="fade-up" delay={500} className="flex flex-col items-center">
           <div
             className="
       relative
@@ -100,8 +106,9 @@ export const Page4 = () => {
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
     </div>
   );
 };
+
