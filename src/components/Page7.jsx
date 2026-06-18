@@ -1,25 +1,44 @@
 import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 
+// ✅ IMAGEN ESTÁTICA (PRODUCCIÓN OK)
+import fusionCentral from "/src/assets/images/FusionCentral.jpg";
+
 const initialRestaurants = [
   {
     id: "rest-1",
     name: "Fusion Central",
-    image: "/src/assets/images/FusionCentral.jpg",
+    image: fusionCentral,
   },
 ];
 
 const categories = ["atencion", "ambiente", "sazon", "presentacion"];
 
-export const Page7 = () => {
-  const [restaurants, setRestaurants] = useState(() => {
-    const stored = JSON.parse(localStorage.getItem("restaurants"));
-    return stored && stored.length ? stored : initialRestaurants;
-  });
+// 🔥 FUNCIÓN SEGURA PARA LOCALSTORAGE
+const getStoredRestaurants = () => {
+  try {
+    const stored = localStorage.getItem("restaurants");
+    if (!stored) return initialRestaurants;
 
-  const [ratings, setRatings] = useState(() => {
-    return JSON.parse(localStorage.getItem("ratings") || "{}");
-  });
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) && parsed.length ? parsed : initialRestaurants;
+  } catch {
+    return initialRestaurants;
+  }
+};
+
+const getStoredRatings = () => {
+  try {
+    const stored = localStorage.getItem("ratings");
+    return stored ? JSON.parse(stored) : {};
+  } catch {
+    return {};
+  }
+};
+
+export const Page7 = () => {
+  const [restaurants, setRestaurants] = useState(getStoredRestaurants);
+  const [ratings, setRatings] = useState(getStoredRatings);
 
   const [newName, setNewName] = useState("");
   const [newImage, setNewImage] = useState(null);
@@ -86,6 +105,7 @@ export const Page7 = () => {
 
   const isSubmitted = (id) => ratings[id]?.submitted;
 
+  // 📸 BASE64 IMAGE (PRODUCCIÓN OK)
   const handleImage = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -117,13 +137,10 @@ export const Page7 = () => {
   };
 
   return (
-    <div className="h-screen bg-white/40 text-black flex flex-col items-center py-10">
-      <ScrollReveal animation="fade-down">
-        <h2 className="text-6xl font-bold mb- font-birthstone">Nuestras</h2>
-        <h2 className="text-6xl font-bold mb-9 font-birthstone">
-          calificaciones
-        </h2>
-      </ScrollReveal>
+    <div className="min-h-screen">
+      <h1 className="text-2xl font-bold text-center my-6">
+        Nuestras calificaciones
+      </h1>
 
       <ScrollReveal
         animation="fade-up"
@@ -134,7 +151,7 @@ export const Page7 = () => {
           {restaurants.map((r) => (
             <div
               key={r.id}
-              className="min-w-85 bg-white/30 rounded-2xl p-4 backdrop-blur-md"
+              className="min-w-[340px] bg-white/30 rounded-2xl p-4 backdrop-blur-md"
             >
               <img
                 src={r.image}
@@ -193,7 +210,8 @@ export const Page7 = () => {
             </div>
           ))}
 
-          <div className="min-w-85 bg-white/10 rounded-2xl p-4 flex flex-col gap-3 border-2 border-dashed border-white/30">
+          {/* AGREGAR RESTAURANTE */}
+          <div className="min-w-[340px] bg-white/10 rounded-2xl p-4 flex flex-col gap-3 border-2 border-dashed border-white/30">
             <p className="text-center font-semibold">Agregar restaurante</p>
 
             <input
