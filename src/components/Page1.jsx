@@ -1,7 +1,6 @@
 import { IoIosArrowDown } from "react-icons/io";
-import BtnMusica from "./btnMusica";
 import imgPaulita from "/src/assets/images/Paulita-cielo.png";
-
+import BtnMusica from "./BtnMusica";
 export const Page1 = () => {
   return (
     <div className="h-screen">
