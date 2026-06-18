@@ -13,11 +13,12 @@ export const Page4 = () => {
           <hr className="w-10" />
         </div>
       </div>
-      <section className="flex flex-col gap-5">
+      <section className="flex flex-col gap-6">
         <div className="flex flex-col items-center">
           <div
             className="
       relative
+      shadow-xl/30
       h-50
       w-70
       overflow-hidden
@@ -46,6 +47,7 @@ export const Page4 = () => {
           <div
             className="
       relative
+      shadow-xl/30
       h-50
       w-70
       overflow-hidden
@@ -74,6 +76,7 @@ export const Page4 = () => {
           <div
             className="
       relative
+      shadow-xl/30
       h-50
       w-70
       overflow-hidden

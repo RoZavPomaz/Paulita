@@ -1,101 +1,222 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const restaurants = [
+const initialRestaurants = [
   {
     id: "rest-1",
-    name: "La Cabaña",
-    image: "/src/assets/images/rest1.jpg",
-  },
-  {
-    id: "rest-2",
-    name: "El Fogón",
-    image: "/src/assets/images/rest2.jpg",
+    name: "Fusion Central",
+    image: "/src/assets/images/FusionCentral.jpg",
   },
 ];
 
 const categories = ["atencion", "ambiente", "sazon", "presentacion"];
 
 export const Page7 = () => {
-  const [ratings, setRatings] = useState({});
+  const [restaurants, setRestaurants] = useState(() => {
+    const stored = JSON.parse(localStorage.getItem("restaurants"));
+    return stored && stored.length ? stored : initialRestaurants;
+  });
 
-  // Cargar datos guardados
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("ratings") || "{}");
-    setRatings(saved);
-  }, []);
+  const [ratings, setRatings] = useState(() => {
+    return JSON.parse(localStorage.getItem("ratings") || "{}");
+  });
 
-  // Guardar rating
-  const handleRate = (restaurantId, category, value) => {
+  const [newName, setNewName] = useState("");
+  const [newImage, setNewImage] = useState(null);
+
+  const saveRestaurants = (data) => {
+    setRestaurants(data);
+    localStorage.setItem("restaurants", JSON.stringify(data));
+  };
+
+  const saveRatings = (data) => {
+    setRatings(data);
+    localStorage.setItem("ratings", JSON.stringify(data));
+  };
+
+  const handleRate = (id, category, value) => {
     const updated = {
       ...ratings,
-      [restaurantId]: {
-        ...ratings[restaurantId],
+      [id]: {
+        ...ratings[id],
         [category]: value,
+        submitted: false,
       },
     };
 
-    setRatings(updated);
-    localStorage.setItem("ratings", JSON.stringify(updated));
+    saveRatings(updated);
   };
 
-  // Verificar si ya votó
-  const hasVoted = (id) => {
-    return ratings[id];
+  const handleReview = (id, value) => {
+    const updated = {
+      ...ratings,
+      [id]: {
+        ...ratings[id],
+        review: value,
+        submitted: false,
+      },
+    };
+
+    saveRatings(updated);
+  };
+
+  const handleSubmit = (id) => {
+    const updated = {
+      ...ratings,
+      [id]: {
+        ...ratings[id],
+        submitted: true,
+      },
+    };
+
+    saveRatings(updated);
+  };
+
+  const handleEdit = (id) => {
+    const updated = {
+      ...ratings,
+      [id]: {
+        ...ratings[id],
+        submitted: false,
+      },
+    };
+
+    saveRatings(updated);
+  };
+
+  const isSubmitted = (id) => ratings[id]?.submitted;
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setNewImage(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const handleAddRestaurant = () => {
+    if (!newName || !newImage) return;
+
+    const newRestaurant = {
+      id: Date.now().toString(),
+      name: newName,
+      image: newImage,
+    };
+
+    const updated = [...restaurants, newRestaurant];
+
+    saveRestaurants(updated);
+
+    setNewName("");
+    setNewImage(null);
   };
 
   return (
-    <div className="h-screen bg-black text-white flex flex-col items-center py-10">
-      <h1 className="text-3xl font-bold mb-6">Restaurantes</h1>
+    <div className="h-screen bg-white/40 text-black flex flex-col items-center py-10">
+      <h2 className="text-6xl font-bold mb- font-birthstone">Nuestras</h2>
+      <h2 className="text-6xl font-bold mb-9 font-birthstone">
+        calificaciones
+      </h2>
 
-      {/* Carrusel */}
       <div className="flex gap-6 overflow-x-auto w-full px-6">
         {restaurants.map((r) => (
           <div
             key={r.id}
-            className="min-w-[300px] bg-white/10 rounded-2xl p-4 backdrop-blur-md"
+            className="min-w-85 bg-white/30 rounded-2xl p-4 backdrop-blur-md"
           >
-            {/* Imagen */}
             <img
               src={r.image}
-              alt={r.name}
-              className="h-40 w-full object-cover rounded-xl mb-3"
+              className="h-50 w-full object-cover rounded-xl mb-3"
             />
 
-            {/* Nombre */}
             <h2 className="text-xl font-bold mb-4">{r.name}</h2>
 
-            {/* Categorías */}
             {categories.map((cat) => (
-              <div key={cat} className="mb-3">
-                <p className="text-sm capitalize mb-1">{cat}</p>
-
-                <div className="flex gap-1">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <button
-                      key={n}
-                      disabled={hasVoted(r.id)}
-                      onClick={() => handleRate(r.id, cat, n)}
-                      className={`text-lg transition ${
-                        ratings[r.id]?.[cat] >= n
-                          ? "text-yellow-400"
-                          : "text-white/30"
-                      }`}
-                    >
-                      ★
-                    </button>
-                  ))}
+              <div key={cat} className="mb-4">
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="capitalize">{cat}</span>
+                  <span className="text-purple-600 font-bold">
+                    {ratings[r.id]?.[cat] || 0}/10
+                  </span>
                 </div>
+
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  step="1"
+                  disabled={isSubmitted(r.id)}
+                  value={ratings[r.id]?.[cat] || 0}
+                  onChange={(e) =>
+                    handleRate(r.id, cat, Number(e.target.value))
+                  }
+                  className="w-full accent-purple-500"
+                />
               </div>
             ))}
 
-            {/* Estado */}
-            {hasVoted(r.id) && (
-              <p className="text-green-400 text-sm mt-3">
-                Ya has calificado este restaurante
-              </p>
+            <textarea
+              placeholder="Escribe una reseña..."
+              disabled={isSubmitted(r.id)}
+              value={ratings[r.id]?.review || ""}
+              onChange={(e) => handleReview(r.id, e.target.value)}
+              className="w-full mt-2 p-2 rounded bg-black/40 text-white text-sm"
+            />
+
+            {!isSubmitted(r.id) ? (
+              <button
+                onClick={() => handleSubmit(r.id)}
+                className="mt-3 w-full bg-purple-600 py-2 rounded"
+              >
+                Confirmar
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit(r.id)}
+                className="mt-3 w-full bg-white py-2 rounded font-bold"
+              >
+                Modificar
+              </button>
             )}
           </div>
         ))}
+
+        <div className="min-w-85 bg-white/10 rounded-2xl p-4 flex flex-col gap-3 border-2 border-dashed border-white/30">
+          <p className="text-center font-semibold">Agregar restaurante</p>
+
+          <input
+            type="text"
+            placeholder="Nombre"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            className="p-2 rounded bg-black/40 text-white text-sm"
+          />
+
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImage}
+            className="text-sm"
+          />
+
+          {newImage && (
+            <img
+              src={newImage}
+              className="h-32 w-full object-cover rounded-lg"
+            />
+          )}
+
+          <button
+            onClick={handleAddRestaurant}
+            className="bg-purple-600 py-2 rounded"
+          >
+            Agregar
+          </button>
+        </div>
       </div>
     </div>
   );

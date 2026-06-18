@@ -16,19 +16,19 @@ const Page2 = () => {
 
         <div className="flex flex-col gap-3 mt-6">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-white/70 w-fit p-4">
+            <div className="rounded-lg bg-white/70 w-fit p-5">
               <FaRegCalendarAlt size={30} color="gray" />
             </div>
             <p className="font-medium">365 días</p>
           </div>
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-white/70 w-fit p-4">
+            <div className="rounded-lg bg-white/70 w-fit p-5">
               <FaRegHeart size={30} />
             </div>
             <p className="font-medium">12 meses</p>
           </div>
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-white/70 w-fit p-4">
+            <div className="rounded-lg bg-white/70 w-fit p-5">
               <FaRegStar size={30} />
             </div>
             <p className="font-medium">Muchos recuerdos</p>
