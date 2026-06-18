@@ -57,7 +57,7 @@ const Page3 = () => {
 
             <div>
               <h2 className="font-bold">Tu amor por </h2>
-              <h2 className="font-bold">el cielo</h2>
+              <h2 className="font-bold">los paisajes</h2>
               <p className="font-light">Como si cada uno</p>
               <p className="font-light">fuera magico.</p>
             </div>
@@ -69,4 +69,3 @@ const Page3 = () => {
 };
 
 export default Page3;
-
