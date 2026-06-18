@@ -6,8 +6,8 @@ const Page3 = () => {
   return (
     <div className="h-screen">
       <div className="flex flex-col items-center text-white">
-        <p className="mb-2">Entre tantos días,</p>
-        <p>hay cosas que me</p>
+        <p className="mb-2 font-Chelsea">Entre tantos días,</p>
+        <p className="font-Chelsea">hay cosas que me</p>
         <h2 className="font-birthstone text-5xl">encantan de ti</h2>
         <FaRegHeart color="gold" className="mx-auto mb-5 mt-3" />
       </div>
@@ -16,7 +16,7 @@ const Page3 = () => {
           <CiFaceSmile size={55} color="gold" />
 
           <div>
-            <h2 className="font-medium">Tu sonrisa</h2>
+            <h2 className="font-bold">Tu sonrisa</h2>
             <p className="font-light">Que ilumina</p>
             <p className="font-light">cualquier lugar.</p>
           </div>
@@ -24,7 +24,7 @@ const Page3 = () => {
         <div className="flex items-center justify-center gap-5 px-5 py-8 w-[70%] bg-white/40 rounded-3xl">
           <CiCamera size={55} color="gold" />
           <div>
-            <h2 className="font-medium">Tu mirada</h2>
+            <h2 className="font-bold">Tu mirada</h2>
             <p className="font-light">Que ve la belleza</p>
             <p className="font-light">en los detalles.</p>
           </div>
@@ -33,7 +33,7 @@ const Page3 = () => {
           <CiHeart size={55} color="gold" />
 
           <div>
-            <h2 className="font-medium">Tu forma de ser</h2>
+            <h2 className="font-bold">Tu forma de ser</h2>
             <p className="font-light">Unica, auténtica</p>
             <p className="font-light">y maravillosa.</p>
           </div>
@@ -42,8 +42,8 @@ const Page3 = () => {
           <IoSunnyOutline size={55} color="gold" />
 
           <div>
-            <h2 className="font-medium">Tu amor por </h2>
-            <h2 className="font-medium">el cielo</h2>
+            <h2 className="font-bold">Tu amor por </h2>
+            <h2 className="font-bold">el cielo</h2>
             <p className="font-light">Como si cada uno</p>
             <p className="font-light">fuera magico.</p>
           </div>

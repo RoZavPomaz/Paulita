@@ -5,8 +5,8 @@ export const Page4 = () => {
   return (
     <div className="h-screen">
       <div className="text-white text-center">
-        <p>Lugares, risas</p>
-        <p>y aventuras</p>
+        <p className="font-Chelsea">Lugares, risas</p>
+        <p className="font-Chelsea">y aventuras</p>
         <div className="flex  gap-3 items-center justify-center mt-4 mb-6">
           <hr className="w-10" />
           <FaRegHeart />
@@ -22,7 +22,7 @@ export const Page4 = () => {
       w-70
       overflow-hidden
       rounded-2xl
-      bg-[url('/src/assets/images/Atardeceroxa.jpeg')]
+      bg-[url('/src/assets/images/AtardecerOxa.jpeg')]
       bg-cover
       bg-center
     "

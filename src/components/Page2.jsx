@@ -5,7 +5,7 @@ const Page2 = () => {
     <div className=" flex flex-col h-screen items-center text-white">
       <section>
         <div className="text-center flex flex-col gap-2 mt-5">
-          <p>Un año de </p>
+          <p className="font-Chelsea">Un año de </p>
           <h2 className="font-birthstone text-5xl">Momentos</h2>
           <div className="flex  gap-3 items-center justify-center">
             <hr className="w-10" />
@@ -37,8 +37,8 @@ const Page2 = () => {
         <img src={MotoImg} alt="" className="size-45 mt-5" />
       </section>
       <div className="text-center flex flex-col gap-2 mt-10">
-        <p>Cada día</p>
-        <p>ha tenido algo</p>
+        <p className="font-Chelsea">Cada día</p>
+        <p className="font-Chelsea">ha tenido algo</p>
         <h2 className="font-birthstone text-5xl">especial</h2>
         <div className="flex justify-center">
           <FaRegHeart color="gold" />
