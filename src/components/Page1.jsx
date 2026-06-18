@@ -1,25 +1,29 @@
 import { IoIosArrowDown } from "react-icons/io";
-import imgPaulita from "/src/assets/images/Paulita-cielo.png";
+import imgPaulita from "../assets/images/Paulita-cielo.png";
 import BtnMusica from "./BtnMusica";
+import { FaRegHeart } from "react-icons/fa";
 export const Page1 = () => {
   return (
     <div className="h-screen">
-      <div className="flex flex-col h-screen justify-center items-center">
+      <div className="flex flex-col h-screen justify-around items-center">
         <BtnMusica />
         <div>
-          <h1 className="flex flex-col justify-center items-center font-bold text-2xl text-center text-white">
-            Paulita, <br />
-            hace un año <br />
-            llegaste aquí
+          <h1 className="flex flex-col justify-center items-center font-light text-2xl text-center text-white">
+            Paulita,
           </h1>
+          <p className="text-white text-center font-birthstone text-7xl">
+            Hace un año
+          </p>
+          <p className="text-white text-center mb-5">llegaste a esta ciudad</p>
 
-          <p className="text-center text-white">
+          <FaRegHeart color="white" className="mx-auto" size={20} />
+          <p className="text-center text-white mt-5">
             Todo empezó <br />a cambiar
           </p>
-          <img src={imgPaulita} alt="" className="h-60 " />
+          <img src={imgPaulita} alt="" className="h-60 mx-auto" />
         </div>
         <div className="flex flex-col items-center gap-2">
-          <div className="w-0 h-20 border border-white"></div>
+          <div className="w-0 h-12 border border-white"></div>
 
           <p className="text-white">Desliza hacia abajo</p>
 

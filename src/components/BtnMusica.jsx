@@ -17,9 +17,9 @@ const BtnMusica = () => {
   return (
     <button
       onClick={toggleMusica}
-      className="rounded-2xl bg-white/80 w-fit h-8 flex items-center justify-center cursor-pointer gap-2 px-3 text-black"
+      className="rounded-3xl bg-white/70 w-fit h-11 flex items-center justify-center cursor-pointer gap-2 px-3 text-black"
     >
-      <img src={musicaIcon} alt="" className="w-5 h-5" />
+      <img src={musicaIcon} alt="" className="w-7 h-7" />
       <p className="font-medium">Reproducir</p>
     </button>
   );
